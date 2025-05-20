@@ -27,14 +27,17 @@ const AdminLayout = () => {
       <aside className={styles.sidebar}>
         <h2>Admin Panel</h2>
         <nav>
-          <NavLink to="/admin-dashboard" end activeClassName={styles.active}>
+          {/* <NavLink to="/admin-dashboard" end activeClassName={styles.active}>
             Dashboard
-          </NavLink>
-          <NavLink to="/admin-dashboard/users" activeClassName={styles.active}>
+          </NavLink> */}
+          <NavLink to="/admin-dashboard" activeClassName={styles.active}>
             Users
           </NavLink>
           <NavLink to="/admin-dashboard/orders" activeClassName={styles.active}>
             Orders
+          </NavLink>
+          <NavLink to="/admin-dashboard/low-stock" activeClassName={styles.active}>
+            Low Stock Products
           </NavLink>
           <NavLink
             to="/admin-dashboard/warehouses"

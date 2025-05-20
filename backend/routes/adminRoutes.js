@@ -3,7 +3,7 @@ import { adminLogin } from '../controllers/adminController.js';
 import { getUserList, updateUserStatus } from '../controllers/adminUserController.js';
 import { adminAuth } from '../middleware/authMiddleware.js';
 import { createWarehouse, getAllWarehouses } from '../controllers/warehouseController.js';
-import { createProduct, getProductById, getProductsByWarehouse, updateProduct } from '../controllers/productController.js';
+import { createProduct, getLowStockProducts, getProductById, getProductsByWarehouse, updateProduct } from '../controllers/productController.js';
 const router = express.Router(); 
 
 router.post('/adminLogin', adminLogin);
@@ -18,6 +18,7 @@ router.get("/products", adminAuth, getProductsByWarehouse);
 
 router.get("/product/:productId", adminAuth, getProductById);
 router.put("/product/:productId", adminAuth, updateProduct);
+router.get("/low-stock", adminAuth,getLowStockProducts);
 
 
 

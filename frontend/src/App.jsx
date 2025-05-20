@@ -13,6 +13,9 @@ import Warehouses from "./pages/Warehouse/index.jsx";
 import WarehouseProduct from "./pages/WarehouseProduct/index.jsx";
 import CreateProduct from "./pages/CreateProducts/index.jsx";
 import ExploreProducts from "./pages/ExploreProducts/index.jsx";
+import UserOrders from "./pages/UserOrders/index.jsx";
+import AdminOrders from "./pages/AdminOrder/index.jsx";
+import LowStock from "./pages/LowStock/index.jsx";
 
 function App() {
   return (
@@ -21,9 +24,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin-dashboard" element={<AdminLayout />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="users" element={<Users />} />
-          <Route path="orders" element={<Orders />} />
+          <Route index element={<Users />} />
+          {/* <Route path="users" element={<Users />} /> */}
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="low-stock" element={<LowStock />} />
           <Route path="warehouses" element={<Warehouses />} />
           <Route path="createWarehouse" element={<CreateWarehouse />} />
           <Route
@@ -42,6 +46,7 @@ function App() {
 
         <Route path="/user-dashboard" element={<UserLayout />}>
           <Route index element={<ExploreProducts/>} />
+          <Route path="orders" element={<UserOrders />} />
           {/* <Route path="orders" element={<UserOrders />} />
           <Route path="profile" element={<UserProfile />} /> */}
         </Route>

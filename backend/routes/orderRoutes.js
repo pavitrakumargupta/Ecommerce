@@ -11,8 +11,8 @@ import { adminAuth } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.post("/create",verifyUserStatus ,createOrder);
-router.put("/update/:id", updateOrder);
+router.put("/updateOrder/:id",adminAuth ,updateOrder);
 router.get("/getUserOrders", verifyUserStatus,getOrdersByUserId);
-router.get("/all",adminAuth, getAllOrders);
+router.get("/getAllOrders",adminAuth, getAllOrders);
 
 export default router;

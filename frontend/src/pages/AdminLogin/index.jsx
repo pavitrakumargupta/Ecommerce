@@ -12,8 +12,6 @@ const AdminLogin = () => {
   useEffect(() => {
     const token = localStorage.getItem("adminToken");
 
-    console.log("token",token);
-    
     if (token) {
       navigate("/admin-dashboard");
     }
@@ -24,11 +22,14 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/adminLogin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "http://localhost:5000/api/admin/adminLogin",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -63,6 +64,16 @@ const AdminLogin = () => {
           />
           {error && <p className={styles.error}>{error}</p>}
           <button type="submit">Login</button>
+          <p className={styles.switch}>
+            Want to login as user?{" "}
+            <button
+              type="button"
+              className={styles.linkButton}
+              onClick={() => navigate("/user-login")}
+            >
+              Switch to User
+            </button>
+          </p>
         </form>
       </div>
     </div>

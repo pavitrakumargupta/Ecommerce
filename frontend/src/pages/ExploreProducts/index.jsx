@@ -11,17 +11,23 @@ const ExploreProducts = () => {
   const [coordinates, setCoordinates] = useState(null);
   const debounceTimeout = useRef(null);
 
+  // Modal and ordering states
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [orderQuantity, setOrderQuantity] = useState(1);
+  const [placingOrder, setPlacingOrder] = useState(false);
+
   const fetchProducts = async (lat, lng, search = "") => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("user_token");
+      const token = localStorage.getItem("userToken");
 
       const res = await axios.get(
         "http://localhost:5000/api/user/getProducts",
         {
           params: { lat, lng, search },
           headers: {
-            Authorization: `Bearer ${token}`, // ✅ manually attach JWT token
+            Authorization: `Bearer ${token}`, // attach JWT token
           },
         }
       );
@@ -78,10 +84,48 @@ const ExploreProducts = () => {
       if (coordinates) {
         fetchProducts(coordinates.lat, coordinates.lng, term);
       }
-    }, 500); // 500ms delay
+    }, 500);
   };
 
-  //   if (loading) return <div className={styles.loader}>Loading nearby products...</div>;
+  // Open modal with selected product info
+  const handleOrderNowClick = (product, warehouse) => {
+    setSelectedProduct({ ...product, warehouse });
+    setOrderQuantity(1);
+    setModalOpen(true);
+  };
+
+  // Submit order API call
+  const submitOrder = async () => {
+    if (!selectedProduct) return;
+
+    try {
+      setPlacingOrder(true);
+      const token = localStorage.getItem("userToken");
+
+      await axios.post(
+        "http://localhost:5000/api/order/create",
+        {
+          productId: selectedProduct._id,
+          quantity: orderQuantity,
+          price: selectedProduct.price,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      alert("Order placed successfully!");
+      setModalOpen(false);
+    } catch (err) {
+      console.error("Order failed:", err);
+      alert("Failed to place order.");
+    } finally {
+      setPlacingOrder(false);
+    }
+  };
+
   if (locationError) return <div className={styles.error}>{locationError}</div>;
 
   return (
@@ -115,6 +159,11 @@ const ExploreProducts = () => {
                   <p>
                     <strong>Price:</strong> ₹{product.price}
                   </p>
+                  <button
+                    onClick={() => handleOrderNowClick(product, warehouse)}
+                  >
+                    Order Now
+                  </button>
                 </div>
               ))}
             </div>
@@ -122,6 +171,56 @@ const ExploreProducts = () => {
         ))
       ) : (
         <p>No matching products found.</p>
+      )}
+
+      {/* Modal */}
+      {modalOpen && selectedProduct && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3>Order: {selectedProduct.name}</h3>
+            <p>
+              <strong>Available:</strong> {selectedProduct.quantity}
+            </p>
+            <p>
+              <strong>Price per unit:</strong> ₹{selectedProduct.price}
+            </p>
+
+            <label>
+              Quantity:{" "}
+              <input
+                type="number"
+                min={1}
+                max={selectedProduct.quantity}
+                value={orderQuantity}
+                onChange={(e) =>
+                  setOrderQuantity(
+                    Math.max(
+                      1,
+                      Math.min(selectedProduct.quantity, Number(e.target.value))
+                    )
+                  )
+                }
+              />
+            </label>
+
+            <p>
+              <strong>Total amount:</strong> ₹
+              {orderQuantity * selectedProduct.price}
+            </p>
+
+            <div className={styles.modalActions}>
+              <button onClick={submitOrder} disabled={placingOrder}>
+                {placingOrder ? "Placing..." : "Confirm Order"}
+              </button>
+              <button
+                onClick={() => setModalOpen(false)}
+                className={styles.cancelBtn}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

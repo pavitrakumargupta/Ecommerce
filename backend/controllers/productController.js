@@ -150,5 +150,19 @@ export const getProductsByNearestWarehouse = async (req, res) => {
   }
 };
 
+export const getLowStockProducts = async (req, res) => {
+  try {
+    const lowStockProducts = await Product.find({ quantity: { $lt: 3 } }).populate("warehouseId", "name address");
+
+    if (lowStockProducts.length === 0) {
+      return res.status(404).json({ message: "No low stock products found" });
+    }
+
+    res.status(200).json(lowStockProducts);
+  } catch (err) {
+    console.error("Error fetching low stock products:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
 import axios from "axios";
@@ -36,6 +36,14 @@ const Index = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+    useEffect(() => {
+      const token = localStorage.getItem("userToken");
+      
+      if (token) {
+        navigate("/user-dashboard");
+      }
+    }, [navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!validate()) return;
@@ -57,7 +65,7 @@ const Index = () => {
 
       const token = res.data?.token;
       if (token) {
-        localStorage.setItem("user_token", token);
+        localStorage.setItem("userToken", token);
         alert("Login successful");
         navigate("/user-dashboard"); // Update route if needed
       } else {

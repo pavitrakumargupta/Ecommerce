@@ -1,0 +1,25 @@
+.adminOrders {
+  padding: 20px;
+}
+
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  thead{
+    color: #333;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f5f5f5;
+  }
+
+  select {
+    padding: 5px;
+  }
+}
