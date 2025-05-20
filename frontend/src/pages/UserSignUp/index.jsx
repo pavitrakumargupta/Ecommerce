@@ -53,7 +53,7 @@ const UserSignUp = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post('http://localhost:5000/api/user/userSignup', {
+      const res = await axios.post('https://ecommerce-backend-89ed.onrender.com/api/user/userSignup', {
         firstname,
         lastname,
         email,
