@@ -23,7 +23,7 @@ const AdminLogin = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/adminLogin",
+        "https://ecommerce-backend-89ed.onrender.com/api/admin/adminLogin",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
