@@ -23,7 +23,7 @@ const CreateWarehouse = () => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.post(
-        "http://localhost:5000/api/admin/warehouses",
+        "https://ecommerce-backend-89ed.onrender.com/api/admin/warehouses",
         {
           name,
           address,

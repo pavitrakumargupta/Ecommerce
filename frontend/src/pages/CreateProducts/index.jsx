@@ -20,7 +20,7 @@ const CreateProduct = () => {
         try {
           const token = localStorage.getItem("adminToken");
           const res = await axios.get(
-            `http://localhost:5000/api/admin/product/${productID}`,
+            `https://ecommerce-backend-89ed.onrender.com/api/admin/product/${productID}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -53,13 +53,13 @@ const CreateProduct = () => {
 
       if (isEditMode) {
         await axios.put(
-          `http://localhost:5000/api/admin/product/${productID}`,
+          `https://ecommerce-backend-89ed.onrender.com/api/admin/product/${productID}`,
           { ...form },
           { headers: { Authorization: `Bearer ${token}` } }
         );
       } else {
         await axios.post(
-          "http://localhost:5000/api/admin/products",
+          "https://ecommerce-backend-89ed.onrender.com/api/admin/products",
           { ...form, warehouseId },
           { headers: { Authorization: `Bearer ${token}` } }
         );

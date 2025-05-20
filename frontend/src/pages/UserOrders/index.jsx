@@ -12,7 +12,7 @@ const UserOrders = () => {
       setLoading(true);
       const token = localStorage.getItem("userToken");
 
-      const res = await axios.get("http://localhost:5000/api/order/getUserOrders", {
+      const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/order/getUserOrders", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

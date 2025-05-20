@@ -13,7 +13,7 @@ const WarehouseProduct = () => {
       try {
         const token = localStorage.getItem("adminToken");
         const res = await axios.get(
-          `http://localhost:5000/api/admin/products?warehouseId=${warehouseId}`,
+          `https://ecommerce-backend-89ed.onrender.com/api/admin/products?warehouseId=${warehouseId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

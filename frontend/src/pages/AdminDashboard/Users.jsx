@@ -10,7 +10,7 @@ const UserList = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const res = await axios.get(
-        `http://localhost:5000/api/admin/users?search=${search}`,
+        `https://ecommerce-backend-89ed.onrender.com/api/admin/users?search=${search}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -29,7 +29,7 @@ const UserList = () => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.patch(
-        `http://localhost:5000/api/admin/users/${userId}`,
+        `https://ecommerce-backend-89ed.onrender.com/api/admin/users/${userId}`,
         { action },
         {
           headers: { Authorization: `Bearer ${token}` },

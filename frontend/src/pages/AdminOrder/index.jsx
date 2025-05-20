@@ -12,7 +12,7 @@ const AdminOrders = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("adminToken");
-      const res = await axios.get("http://localhost:5000/api/order/getAllOrders", {
+      const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/order/getAllOrders", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrders(res.data);
@@ -32,7 +32,7 @@ const AdminOrders = () => {
       setUpdatingId(id);
       const token = localStorage.getItem("adminToken");
       await axios.put(
-        `http://localhost:5000/api/order/updateOrder/${id}`,
+        `https://ecommerce-backend-89ed.onrender.com/api/order/updateOrder/${id}`,
         { status: newStatus },
         {
           headers: { Authorization: `Bearer ${token}` },

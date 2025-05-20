@@ -13,7 +13,7 @@ const LowStock = () => {
       try {
         const token = localStorage.getItem("adminToken");
 
-        const res = await axios.get("http://localhost:5000/api/admin/low-stock", {
+        const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/admin/low-stock", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProducts(res.data);

@@ -23,7 +23,7 @@ const ExploreProducts = () => {
       const token = localStorage.getItem("userToken");
 
       const res = await axios.get(
-        "http://localhost:5000/api/user/getProducts",
+        "https://ecommerce-backend-89ed.onrender.com/api/user/getProducts",
         {
           params: { lat, lng, search },
           headers: {
@@ -103,7 +103,7 @@ const ExploreProducts = () => {
       const token = localStorage.getItem("userToken");
 
       await axios.post(
-        "http://localhost:5000/api/order/create",
+        "https://ecommerce-backend-89ed.onrender.com/api/order/create",
         {
           productId: selectedProduct._id,
           quantity: orderQuantity,
