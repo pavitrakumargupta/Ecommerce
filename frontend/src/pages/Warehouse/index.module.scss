@@ -1,0 +1,33 @@
+.container {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.card {
+  background: #f8f8f8;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  color: #333;
+}
+
+.actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.actions button {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}

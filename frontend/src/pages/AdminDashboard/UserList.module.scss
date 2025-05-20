@@ -1,0 +1,113 @@
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  margin-bottom: 16px;
+  color: #333;
+  text-align: center;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: 1.5px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 12px 10px;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.table th {
+  background: #f9f9f9;
+  font-weight: 600;
+  color: #555;
+}
+
+.status {
+  padding: 5px 12px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status.active {
+  background-color: #28a745;
+}
+
+.status.blocked {
+  background-color: #dc3545;
+}
+
+.status.pending {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.actions button {
+  margin-right: 8px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: #fff;
+}
+
+.actions button.block {
+  background-color: #dc3545;
+}
+
+.actions button.block:hover {
+  background-color: #b02a37;
+}
+
+.actions button.activate {
+  background-color: #28a745;
+}
+
+.actions button.activate:hover {
+  background-color: #1c7c31;
+}
+
+.actions button.delete {
+  background-color: #6c757d;
+}
+
+.actions button.delete:hover {
+  background-color: #5a6268;
+}
+
+.noData {
+  text-align: center;
+  padding: 40px 0;
+  color: #777;
+  font-style: italic;
+}
