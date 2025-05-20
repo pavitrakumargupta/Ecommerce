@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from "../../axios"
 import styles from './index.module.scss';
 
 const UserOrders = () => {
@@ -12,7 +13,7 @@ const UserOrders = () => {
       setLoading(true);
       const token = localStorage.getItem("userToken");
 
-      const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/order/getUserOrders", {
+      const res = await axios.get("/order/getUserOrders", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

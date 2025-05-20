@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios"
 import styles from "./index.module.scss";
 
 const LocationPicker = ({ onSelect }) => {
@@ -23,7 +24,7 @@ const CreateWarehouse = () => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.post(
-        "https://ecommerce-backend-89ed.onrender.com/api/admin/warehouses",
+        "/admin/warehouses",
         {
           name,
           address,

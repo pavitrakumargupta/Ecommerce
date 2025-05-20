@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios"
 import styles from "./index.module.scss"; // assuming you have some styles
 
 const LowStock = () => {
@@ -13,7 +14,7 @@ const LowStock = () => {
       try {
         const token = localStorage.getItem("adminToken");
 
-        const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/admin/low-stock", {
+        const res = await axios.get("/admin/low-stock", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setProducts(res.data);

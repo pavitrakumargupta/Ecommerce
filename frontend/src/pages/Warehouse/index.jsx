@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios"
 import styles from "./index.module.scss";
 
 export const getAddressFromCoordinates = async (lat, lon) => {
@@ -17,13 +18,14 @@ export const getAddressFromCoordinates = async (lat, lon) => {
 
 const Warehouses = () => {
   const [warehouses, setWarehouses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchWarehouses = async () => {
       try {
         const token = localStorage.getItem("adminToken");
-        const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/admin/warehouses", {
+        const res = await axios.get("/admin/warehouses", {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -39,6 +41,8 @@ const Warehouses = () => {
         setWarehouses(enriched);
       } catch (err) {
         console.error("Failed to fetch warehouses", err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -53,25 +57,30 @@ const Warehouses = () => {
           ➕ Create Warehouse
         </button>
       </div>
-      <ul className={styles.list}>
-        {warehouses.map((wh) => (
-          <li key={wh._id} className={styles.card}>
-            <strong>{wh.name}</strong>
-            <br />
-            Coordinates: [{wh.location?.coordinates?.[1]}, {wh.location?.coordinates?.[0]}]
-            <br />
-            Address: {wh.resolvedAddress}
-            <div className={styles.actions}>
-              <button onClick={() => navigate(`/admin-dashboard/warehouses/${wh._id}/products`)}>
-                📦 View Products
-              </button>
-              <button onClick={() => navigate(`/admin-dashboard/warehouses/${wh._id}/add-product/new`)}>
-                ➕ Add Product
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
+
+      {loading ? (
+        <div className={styles.loading}>Loading warehouses...</div>
+      ) : (
+        <ul className={styles.list}>
+          {warehouses.map((wh) => (
+            <li key={wh._id} className={styles.card}>
+              <strong>{wh.name}</strong>
+              <br />
+              Coordinates: [{wh.location?.coordinates?.[1]}, {wh.location?.coordinates?.[0]}]
+              <br />
+              Address: {wh.resolvedAddress}
+              <div className={styles.actions}>
+                <button onClick={() => navigate(`/admin-dashboard/warehouses/${wh._id}/products`)}>
+                  📦 View Products
+                </button>
+                <button onClick={() => navigate(`/admin-dashboard/warehouses/${wh._id}/add-product/new`)}>
+                  ➕ Add Product
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

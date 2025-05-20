@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from "../../axios"
 import styles from './index.module.scss';
 
 const AdminOrders = () => {
@@ -12,7 +13,7 @@ const AdminOrders = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem("adminToken");
-      const res = await axios.get("https://ecommerce-backend-89ed.onrender.com/api/order/getAllOrders", {
+      const res = await axios.get("/order/getAllOrders", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setOrders(res.data);
@@ -32,7 +33,7 @@ const AdminOrders = () => {
       setUpdatingId(id);
       const token = localStorage.getItem("adminToken");
       await axios.put(
-        `https://ecommerce-backend-89ed.onrender.com/api/order/updateOrder/${id}`,
+        `/order/updateOrder/${id}`,
         { status: newStatus },
         {
           headers: { Authorization: `Bearer ${token}` },

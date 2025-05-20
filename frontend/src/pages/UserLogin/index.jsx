@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios"
 
 const Index = () => {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const Index = () => {
       }
 
       const res = await axios.post(
-        "https://ecommerce-backend-89ed.onrender.com/api/user/userLogin",
+        "/user/userLogin",
         payload
       );
 

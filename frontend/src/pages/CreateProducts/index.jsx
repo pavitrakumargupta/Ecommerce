@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios"
 import styles from "./index.module.scss";
 
 const CreateProduct = () => {
@@ -20,7 +21,7 @@ const CreateProduct = () => {
         try {
           const token = localStorage.getItem("adminToken");
           const res = await axios.get(
-            `https://ecommerce-backend-89ed.onrender.com/api/admin/product/${productID}`,
+            `/admin/product/${productID}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
@@ -53,13 +54,13 @@ const CreateProduct = () => {
 
       if (isEditMode) {
         await axios.put(
-          `https://ecommerce-backend-89ed.onrender.com/api/admin/product/${productID}`,
+          `/admin/product/${productID}`,
           { ...form },
           { headers: { Authorization: `Bearer ${token}` } }
         );
       } else {
         await axios.post(
-          "https://ecommerce-backend-89ed.onrender.com/api/admin/products",
+          "/admin/products",
           { ...form, warehouseId },
           { headers: { Authorization: `Bearer ${token}` } }
         );

@@ -8,9 +8,24 @@ import orderRoutes from "./routes/orderRoutes.js";
 
 dotenv.config();
 const app = express();
+
+
+const allowedOrigins = [
+  "http://localhost:5173",                     // your local dev
+  "https://ecommer-warehouse.netlify.app",     // your deployed frontend
+];
+
 app.use(
   cors({
-    origin: "https://ecommer-warehouse.netlify.app",
+    origin: function (origin, callback) {
+      // allow requests with no origin (like mobile apps or cron jobs)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
@@ -20,6 +35,9 @@ app.use(express.json());
 app.use("/api/user", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/order", orderRoutes);
+app.get("/", (req, res) => {
+  res.send("Server is up and running");
+});
 
 connectDB();
 

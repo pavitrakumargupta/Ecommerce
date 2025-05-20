@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios"
 import styles from "./index.module.scss";
 import { getAddressFromCoordinates } from "../Warehouse";
 
@@ -23,7 +24,7 @@ const ExploreProducts = () => {
       const token = localStorage.getItem("userToken");
 
       const res = await axios.get(
-        "https://ecommerce-backend-89ed.onrender.com/api/user/getProducts",
+        "/user/getProducts",
         {
           params: { lat, lng, search },
           headers: {
@@ -103,7 +104,7 @@ const ExploreProducts = () => {
       const token = localStorage.getItem("userToken");
 
       await axios.post(
-        "https://ecommerce-backend-89ed.onrender.com/api/order/create",
+        "/order/create",
         {
           productId: selectedProduct._id,
           quantity: orderQuantity,

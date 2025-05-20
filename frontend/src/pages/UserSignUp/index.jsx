@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
-import axios from 'axios';
+// import axios from 'axios';
+import axios from "../../axios"
 
 const UserSignUp = () => {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ const UserSignUp = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post('https://ecommerce-backend-89ed.onrender.com/api/user/userSignup', {
+      const res = await axios.post('/user/userSignup', {
         firstname,
         lastname,
         email,

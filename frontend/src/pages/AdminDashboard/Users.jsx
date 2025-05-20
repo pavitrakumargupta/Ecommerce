@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../axios";
 import styles from "./UserList.module.scss"; // import CSS module
 
 const UserList = () => {
@@ -10,7 +10,7 @@ const UserList = () => {
     try {
       const token = localStorage.getItem("adminToken");
       const res = await axios.get(
-        `https://ecommerce-backend-89ed.onrender.com/api/admin/users?search=${search}`,
+        `/admin/users?search=${search}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -29,7 +29,7 @@ const UserList = () => {
     try {
       const token = localStorage.getItem("adminToken");
       await axios.patch(
-        `https://ecommerce-backend-89ed.onrender.com/api/admin/users/${userId}`,
+        `/admin/users/${userId}`,
         { action },
         {
           headers: { Authorization: `Bearer ${token}` },

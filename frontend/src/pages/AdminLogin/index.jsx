@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./index.module.scss";
+import axios from "../../axios"
 
 const AdminLogin = () => {
   const navigate = useNavigate();
@@ -22,23 +23,28 @@ const AdminLogin = () => {
     setError("");
 
     try {
-      const response = await fetch(
-        "https://ecommerce-backend-89ed.onrender.com/api/admin/adminLogin",
+      const {data} = await axios.post(
+        "/admin/adminLogin",
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password }),
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
-
-      const data = await response.json();
-      if (response.ok) {
+      // const data = await response.json();
+      // if (response.ok) {
         localStorage.setItem("adminToken", data.token);
         navigate("/admin-dashboard");
-      } else {
-        setError(data.message || "Login failed");
-      }
+      // } else {
+      //   setError(data.message || "Login failed");
+      // }
     } catch (err) {
+      console.log(err);
+      
       setError("Something went wrong");
     }
   };
