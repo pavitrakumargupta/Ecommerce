@@ -5,11 +5,15 @@ import { connectDB } from "./utils/connectDb/index.js";
 import authRoutes from "./routes/authRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
-import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://ecommer-warehouse.netlify.app",
+    credentials: true,
+  })
+);
 // app.use(cookieParser());
 app.use(express.json());
 
